@@ -36,6 +36,7 @@ void bfs(int src, int des)
          cout << -1 << endl;
      }
 }
+}
 int main()
 {
     ios::sync_with_stdio(false);
