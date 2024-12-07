@@ -4,78 +4,74 @@
 using namespace std;
 #define ll long long
 #define endl '\n'
-const int N = 1005;
-vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
-int n, m;
-char a[N][N];
-bool visit[N][N];
-
-bool valid(int i, int j)
+const int N = 1e5+5;
+const ll INF = 1e18;
+//vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+//char a[N][N];
+//bool visit[N][N];
+// vector<pair<int, int>> v[N];
+// ll dis[N];
+void dijkstra(int src, int n, vector<pair<int, ll>> v[], vector<ll> &dis)
 {
-    if(i>=0 && i<n && j>=0 && j<m && (a[i][j] == '.' || a[i][j]== 'B')) return true;
-    return false;
-}
-bool bfs(int si, int sj)
-{
-    queue<pair<int, int>>q;
-    q.push({si, sj});
-    visit[si][sj] = true;
-
-    while(!q.empty())
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>>pq;
+    
+    dis.assign(n+1, INF);
+    dis[src] = 0;
+    pq.push({0, src});
+    
+    while(!pq.empty())
     {
-        pair<int, int> f = q.front();
-        q.pop();
-
-        if(a[f.first][f.second] == 'B')
+        pair<ll, int> f = pq.top();
+        pq.pop();
+        ll cost = f.first;
+        int node = f.second;
+        
+        if(cost > dis[node]) continue;
+        
+        for(pair<int, int> child : v[node])
         {
-            return true;
-        }
-        for(int i=0; i<4; i++)
-        {
-            int ci = f.first + d[i].first;
-            int cj = f.second + d[i].second;
-
-            if(valid(ci, cj) == true && visit[ci][cj] == false)
+            int childN = child.first;
+            int childC = child.second;
+            if(dis[node] + childC < dis[childN])
             {
-                q.push({ci, cj});
-                visit[ci][cj] = true;
+                dis[childN] = dis[node] + childC;
+                pq.push({dis[childN], childN});
             }
         }
     }
-    return false;
 }
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
-    cin >> n >> m;
+    int n, e;
+    cin >> n >> e;
 
-    pair<int, int> start;
-    for(int i=0; i<n; i++)
+    vector<pair<int, ll>> v[n+1];
+    while(e--)
     {
-        for(int j=0; j<m; j++)
-        {
-            cin >> a[i][j];
-            if(a[i][j] == 'A')
-            {
-                start = {i, j};
-            }
-        }
+        int a, b;
+        ll w;
+        cin >> a >> b >> w;
+        v[a].push_back({b, w});
     }
-    memset(visit, false, sizeof(visit));
-
-
-    if(bfs(start.first, start.second))
+    int src;
+    cin >> src;
+    vector<ll> dis;
+    dijkstra(src, n, v, dis);
+    int t;
+    cin >> t;
+    while(t--)
     {
-        cout << "YES" << endl;
+        int des, cost;
+        cin >> des >> cost;
+        if(dis[des] <= cost) cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
-    else cout << "NO" << endl;
+    
+
 
     return 0;
 }
 
 //Alhamdulillah...
-
-
-
-

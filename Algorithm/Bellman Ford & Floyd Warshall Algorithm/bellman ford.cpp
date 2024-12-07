@@ -18,12 +18,12 @@ int main()
 {
     int n, e;
     cin >> n >> e;
-    vector<Edge> EdgeList;
+    vector<Edge> EdgeList; //prottek ghore 3 ta element thakbe
     while(e--)
     {
         int u, v, c;
         cin >> u >> v >> c;
-        EdgeList.push_back(Edge(u, v, c));
+        EdgeList.push_back(Edge(u, v, c)); //constructor call dilam
     }
     for(int i=0; i<n; i++)
     {
