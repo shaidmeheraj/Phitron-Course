@@ -17,7 +17,7 @@ class Edge
     }
 };
 const int N = 1e3+5;
-const int INF = 1e18;
+const long long INF = 1e18;
 ll dis[N];
 vector<Edge> EdgeList;
 bool bellmanFord(int n, int src)
@@ -31,11 +31,12 @@ bool bellmanFord(int n, int src)
     {
         for(Edge ed : EdgeList)
         {
-            int u, v, c;
+            int u, v;
+            ll c;
             u = ed.u;
             v = ed.v;
             c = ed.c;
-            if(dis[u] < INT_MAX && dis[u] + c < dis[v])
+            if(dis[u] < INF && dis[u] + c < dis[v])
             {
                 dis[v] = dis[u] + c;
             }
@@ -44,11 +45,12 @@ bool bellmanFord(int n, int src)
     //bool cycle = false;
     for(Edge ed : EdgeList)
     {
-        int u, v, c;
+        int u, v;
+        ll c;
         u = ed.u;
         v = ed.v;
         c = ed.c;
-        if(dis[u] < INT_MAX && dis[u] + c < dis[v])
+        if(dis[u] < INF && dis[u] + c < dis[v])
         {
             return true;
         }
