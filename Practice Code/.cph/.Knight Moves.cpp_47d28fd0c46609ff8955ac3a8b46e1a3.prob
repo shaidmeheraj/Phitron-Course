@@ -1,0 +1,1 @@
+{"name":"Local: Knight Moves","url":"e:\\GitHub\\Phitron-Course\\Practice Code\\Knight Moves.cpp","tests":[{"id":1733669211123,"input":"4\n8 8\n0 0\n7 7\n5 6\n0 1\n0 1\n4 4\n0 0\n0 1\n2 2\n0 0\n0 1","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\GitHub\\Phitron-Course\\Practice Code\\Knight Moves.cpp","group":"local","local":true}
